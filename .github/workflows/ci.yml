@@ -50,7 +50,7 @@ jobs:
       - name: Build Docker image
         run: docker build -t lacrei-devops-api:${{ github.sha }} .
 
-      -       - name: Run container
+      -  name: Run container
         env:
           ALLOWED_ORIGIN: ${{ secrets.ALLOWED_ORIGIN }}
         run: |
