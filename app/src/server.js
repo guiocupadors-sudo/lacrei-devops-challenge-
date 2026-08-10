@@ -5,8 +5,14 @@ import helmet from "helmet";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const allowedOrigin = process.env.ALLOWED_ORIGIN;
+
 app.use(helmet());
-app.use(cors());
+
+app.use(cors({
+  origin: allowedOrigin
+}));
+
 app.use(express.json());
 
 app.get("/status", (req, res) => {
