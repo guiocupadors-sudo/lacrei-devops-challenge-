@@ -2,15 +2,12 @@
 
 if [ -z "$1" ]; then
   echo "Uso: ./scripts/rollback.sh <imagem>"
-  echo "Exemplo: ./scripts/rollback.sh lacrei-devops-api:COMMIT_ANTERIOR"
   exit 1
 fi
 
 IMAGE="$1"
 
 echo "Iniciando rollback para: $IMAGE"
-
-docker pull "$IMAGE"
 
 docker stop lacrei-api 2>/dev/null || true
 docker rm lacrei-api 2>/dev/null || true
