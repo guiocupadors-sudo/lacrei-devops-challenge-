@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: app
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Validate JavaScript
+        run: npm run check
+
+      - name: Start application
+        run: |
+          npm start > app.log 2>&1 &
+          sleep 5
+
+      - name: Run tests
+        run: npm test
+
+      - name: Stop application
+        if: always()
+        run: pkill -f "node src/server.js" || true
+
+      - name: Build Docker image
+        run: docker build -t lacrei-devops-api:${{ github.sha }} .
+
+      - name: Run container
+        run: |
+          docker run -d \
+            --name lacrei-api \
+            -p 3000:3000 \
+            lacrei-devops-api:${{ github.sha }}
+
+      - name: Validate container
+        run: |
+          for i in {1..20}; do
+            if curl --fail http://localhost:3000/status; then
+              echo "Container funcionando!"
+              exit 0
+            fi
+            sleep 2
+          done
+
+          docker logs lacrei-api
+          exit 1
