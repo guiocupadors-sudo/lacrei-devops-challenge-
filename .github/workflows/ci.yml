@@ -72,6 +72,42 @@ jobs:
 
           docker logs lacrei-api
           exit 1
+  rollback-test:
+    name: Rollback Test
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build stable version
+        run: docker build -t lacrei-devops-api:stable ./app
+
+      - name: Build new version
+        run: docker build -t lacrei-devops-api:new ./app
+
+      - name: Start new version
+        run: |
+          docker run -d \
+            --name lacrei-api \
+            -p 3000:3000 \
+            lacrei-devops-api:new
+
+      - name: Validate new version
+        run: |
+          sleep 5
+          curl --fail http://localhost:3000/status
+
+      - name: Execute rollback
+        run: |
+          ./scripts/rollback.sh lacrei-devops-api:stable
+
+      - name: Validate rollback
+        run: |
+          sleep 5
+          curl --fail http://localhost:3000/status
+          echo "Rollback executado e validado com sucesso!"
 
   staging:
     name: Deploy to Staging
