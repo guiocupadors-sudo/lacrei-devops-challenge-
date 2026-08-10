@@ -1,6 +1,6 @@
 Lacrei Saúde — DevOps Challenge
 
-📌 Sobre o projeto
+ Sobre o projeto
 
 Este projeto foi desenvolvido como parte do desafio técnico de DevOps da Lacrei Saúde.
 
@@ -10,7 +10,7 @@ A aplicação consiste em uma API REST desenvolvida em Node.js, com uma rota "/s
 
 ---
 
-🎯 Objetivos
+ Objetivos
 
 O projeto busca demonstrar:
 
@@ -28,7 +28,7 @@ O projeto busca demonstrar:
 
 ---
 
-🏗️ Arquitetura
+ Arquitetura
 
                     GitHub
                        │
@@ -58,7 +58,7 @@ O projeto busca demonstrar:
 
 ---
 
-🚀 Aplicação
+ Aplicação
 
 A aplicação foi desenvolvida utilizando:
 
@@ -90,7 +90,7 @@ Retorna uma mensagem identificando o projeto.
 
 ---
 
-🐳 Docker
+ Docker
 
 A aplicação foi containerizada utilizando uma imagem baseada em:
 
@@ -111,7 +111,7 @@ src/server.js
 
 ---
 
-⚙️ CI/CD — GitHub Actions
+CI/CD — GitHub Actions
 
 O pipeline foi desenvolvido utilizando GitHub Actions.
 
@@ -175,7 +175,7 @@ O deploy/teste somente é considerado válido quando a aplicação retorna uma r
 
 ---
 
-🔐 Segurança
+Segurança
 
 Helmet
 
@@ -209,7 +209,7 @@ O valor não é inserido diretamente no repositório.
 
 ---
 
-📜 Logs e observabilidade
+ Logs e observabilidade
 
 O pipeline mantém logs das principais etapas executadas.
 
@@ -227,7 +227,7 @@ A observabilidade implementada nesta etapa é baseada nos logs do GitHub Actions
 
 ---
 
-🔄 Rollback
+ Rollback
 
 Foi implementado um script de rollback em:
 
@@ -265,7 +265,7 @@ O pipeline somente considera o rollback bem-sucedido quando a aplicação volta 
 
 ---
 
-🧪 Evidências de validação
+ Evidências de validação
 
 O GitHub Actions executa automaticamente:
 
@@ -304,7 +304,7 @@ lacrei-devops-challenge/
 
 ---
 
-🛠️ Principais alterações realizadas
+Principais alterações realizadas
 
 Durante o desenvolvimento do projeto foram realizadas as seguintes melhorias:
 
@@ -357,8 +357,7 @@ Rollback
 - Validação da aplicação após o rollback.
 
 ---
-
-☁️ Infraestrutura AWS
+ Infraestrutura AWS
 
 A proposta original do desafio prevê ambientes reais de staging e produção na AWS.
 
@@ -379,7 +378,7 @@ O projeto mantém, entretanto, a estrutura de CI/CD preparada para que essas eta
 
 ---
 
-🔮 Próximas melhorias
+Próximas melhorias
 
 Como evolução do projeto, poderiam ser implementados:
 
@@ -396,7 +395,7 @@ Como evolução do projeto, poderiam ser implementados:
 
 ---
 
-📌 Conclusão
+ Conclusão
 
 O projeto demonstra um fluxo automatizado de desenvolvimento e entrega utilizando Node.js, Docker e GitHub Actions.
 
