@@ -50,13 +50,15 @@ jobs:
       - name: Build Docker image
         run: docker build -t lacrei-devops-api:${{ github.sha }} .
 
-      - - name: Run container
-  run: |
-    docker run -d \
-      --name lacrei-api \
-      -p 3000:3000 \
-      -e ALLOWED_ORIGIN="${{ secrets.ALLOWED_ORIGIN }}" \
-      lacrei-devops-api:${{ github.sha }}
+      -       - name: Run container
+        env:
+          ALLOWED_ORIGIN: ${{ secrets.ALLOWED_ORIGIN }}
+        run: |
+          docker run -d \
+            --name lacrei-api \
+            -p 3000:3000 \
+            -e ALLOWED_ORIGIN="$ALLOWED_ORIGIN" \
+            lacrei-devops-api:${{ github.sha }}
 
       - name: Validate container
         run: |
