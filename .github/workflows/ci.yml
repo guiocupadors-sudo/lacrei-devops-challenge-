@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on:
   push:
@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   test:
+    name: Test and Build
     runs-on: ubuntu-latest
 
     defaults:
@@ -68,3 +69,32 @@ jobs:
 
           docker logs lacrei-api
           exit 1
+
+  staging:
+    name: Deploy to Staging
+    needs: test
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - name: Staging deployment
+        run: |
+          echo "STAGING DEPLOYMENT"
+          echo "Commit: ${{ github.sha }}"
+          echo "Ambiente: staging"
+          echo "Deploy de staging validado."
+
+  production:
+    name: Deploy to Production
+    needs: staging
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Production deployment
+        run: |
+          echo "PRODUCTION DEPLOYMENT"
+          echo "Commit: ${{ github.sha }}"
+          echo "Ambiente: production"
+          echo "Deploy de produção validado."
+
